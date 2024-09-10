@@ -47,6 +47,7 @@ checkdepends=(
 )
 provides=(
   "${_node}-${_pkg}=${pkgver}"
+  "${_pkg}=${pkgver}"
 )
 source=()
 sha256sums=()

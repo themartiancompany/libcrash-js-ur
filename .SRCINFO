@@ -9,6 +9,7 @@ pkgbase = libcrash-js
 	makedepends = make
 	depends = nodejs
 	provides = nodejs-crash-js=0.0.0.0.0.0.0.0.0.0.0.0.1
+	provides = crash-js=0.0.0.0.0.0.0.0.0.0.0.0.1
 	source = crash-js-151061a85dea3985d5c50d167019ad398d08f9a6.zip::https://github.com/themartiancompany/crash-js/archive/151061a85dea3985d5c50d167019ad398d08f9a6.zip
 	validpgpkeys = 97E989E6CF1D2C7F7A41FF9F95684DBE23D6A3E9
 	sha256sums = f39a7f4be27fa100f40ed16a5fabc107b5b0b011854f483c48257f4ce5e170cd

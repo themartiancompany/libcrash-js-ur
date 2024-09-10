@@ -1,6 +1,6 @@
 pkgbase = libcrash-js
 	pkgdesc = A collection of javascript utility functions.
-	pkgver = 0.0.0.0.0.0.0.0.0.0.0.0.1
+	pkgver = 0.0.0.0.0.0.0.0.0.0.0.0.1.1
 	pkgrel = 1
 	url = https://github.com/themartiancompany/crash-js
 	arch = any
@@ -8,10 +8,10 @@ pkgbase = libcrash-js
 	checkdepends = shellcheck
 	makedepends = make
 	depends = nodejs
-	provides = nodejs-crash-js=0.0.0.0.0.0.0.0.0.0.0.0.1
-	provides = crash-js=0.0.0.0.0.0.0.0.0.0.0.0.1
-	source = crash-js-151061a85dea3985d5c50d167019ad398d08f9a6.zip::https://github.com/themartiancompany/crash-js/archive/151061a85dea3985d5c50d167019ad398d08f9a6.zip
+	provides = nodejs-crash-js=0.0.0.0.0.0.0.0.0.0.0.0.1.1
+	provides = crash-js=0.0.0.0.0.0.0.0.0.0.0.0.1.1
+	source = crash-js-020ade6d1602793cb58c6940e92bae5212e541b5.zip::https://github.com/themartiancompany/crash-js/archive/020ade6d1602793cb58c6940e92bae5212e541b5.zip
 	validpgpkeys = 97E989E6CF1D2C7F7A41FF9F95684DBE23D6A3E9
-	sha256sums = f39a7f4be27fa100f40ed16a5fabc107b5b0b011854f483c48257f4ce5e170cd
+	sha256sums = 471708ef47cfc0995efe02c5e85668be8760bcc3567d46691be82f789c795c44
 
 pkgname = libcrash-js

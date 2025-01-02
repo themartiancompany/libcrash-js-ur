@@ -8,8 +8,8 @@ _offline="false"
 _git="false"
 _pkg=crash-js
 pkgname="lib${_pkg}"
-pkgver="0.0.0.0.0.0.0.0.0.0.0.1.1.1"
-_commit="a8817a4948bcd5a9243f8ccf544b0bc007333a32"
+pkgver="0.0.0.0.0.0.0.0.0.0.0.1.1.1.1"
+_commit="87fe200e70a944935ebb68bc34f3cab8c16ee0af"
 pkgrel=1
 _pkgdesc=(
   "A collection of javascript utility functions."
@@ -73,7 +73,7 @@ _tarname="${_pkg}-${_tag}"
     _sum="d4f4179c6e4ce1702c5fe6af132669e8ec4d0378428f69518f2926b969663a91"
   elif [[ "${_tag_name}" == "commit" ]]; then
     _tar="${_tarname}.zip::${_url}/archive/${_commit}.zip"
-    _sum='4a87d7ced8ec848e006b6e9b4e709b801e39153e1ec104042e95dd82b1df8714'
+    _sum='2394a60f5a8bb34b9ef7950c10ef983e06dc5d24e11f3efaaa711f4171b33eff'
   fi && \
     source+=(
       "${_tar}"

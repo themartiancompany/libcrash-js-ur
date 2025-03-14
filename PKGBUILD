@@ -41,6 +41,22 @@ if [[ ! -v "_evmfs" ]]; then
   fi
 fi
 _node='nodejs'
+if [[ "${_os}" == "Android" ]]; then
+  # This will have to be removed when we
+  # will have non-termux missing-provides bugged
+  # life and dogeos android nodejs and nodejs-lts
+  # builds.
+  _node_lts="$( \
+    pacman \
+      -Q \
+      "nodejs-lts" | \
+      awk \
+        '{print $1}' \
+      2>/dev/null)"
+  if [[ "${_node_lts}" != "" ]]; then
+    _node="nodejs-lts"
+  fi
+fi
 _offline="false"
 _git="false"
 _pkg=crash-js

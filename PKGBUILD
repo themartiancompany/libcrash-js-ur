@@ -57,12 +57,23 @@ if [[ "${_os}" == "Android" ]]; then
     _node="nodejs-lts"
   fi
 fi
-_offline="false"
-_git="false"
+if [[ ! -v "_git" ]]; then
+  _git="false"
+fi
+if [[ ! -v "_offline" ]]; then
+  _offline="false"
+fi
+if [[ ! -v "_git_http" ]]; then
+  _git_http="gitlab"
+fi
+_archive_format="tar.gz"
+if [[ "${_git_http}" == "github" ]]; then
+  _archive_format="zip"
+fi
 _pkg=crash-js
 pkgname="lib${_pkg}"
-pkgver="0.0.0.0.0.0.0.0.0.0.1"
-_commit="e6c8c347249395fc34fb8daf4ead3f87b2039e5d"
+pkgver="0.0.0.0.0.0.0.0.0.0.1.1.1"
+_commit="eebf1926abc0f64e0c9255f6acec1d54a75000ec"
 pkgrel=1
 _pkgdesc=(
   "A collection of Javascript utility functions."
@@ -106,15 +117,16 @@ _tarname="${_pkg}-${_tag}"
 if [[ "${_offline}" == "true" ]]; then
   _url="file://${HOME}/${pkgname}"
 fi
+_archive_sum="d085a0f782cb07dfd3bae746d24c724db3f17fc20bcc81401e4fb074d0e30914"
+_archive_sig_sum="6a72b8b92375b7fdd59b631a74c55f38da9e03de3f44ccc216a61c681052c72d"
+_evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
 _evmfs_network="100"
 _evmfs_address="0x69470b18f8b8b5f92b48f6199dcb147b4be96571"
-_evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
-_archive_sum='41addfcb5007649bb589e58c9fd7f92c702a51a0de562b26a48bb0e23ba54ae8'
-_evmfs_archive_uri="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}/${_archive_sum}"
-_evmfs_archive_src="${_tarname}.zip::${_evmfs_archive_uri}"
-_archive_sig_sum="1a7317fb91dc587120f231115d6153f8c5c0b9450725e981b7f6b979d900c066"
-_archive_sig_uri="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}/${_archive_sig_sum}"
-_archive_sig_src="${_tarname}.zip.sig::${_archive_sig_uri}"
+_evmfs_dir="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}"
+_evmfs_archive_uri="${_evmfs_dir}/${_archive_sum}"
+_evmfs_archive_src="${_tarname}.${_archive_format}::${_evmfs_archive_uri}"
+_archive_sig_uri="${_evmfs_dir}/${_archive_sig_sum}"
+_archive_sig_src="${_tarname}.${_archive_format}.sig::${_archive_sig_uri}"
 if [[ "${_evmfs}" == "true" ]]; then
   makedepends+=(
     "evmfs"

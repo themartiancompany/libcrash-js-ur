@@ -82,7 +82,7 @@ pkgdesc="${_pkgdesc[*]}"
 arch=(
   'any'
 )
-_http="https://github.com"
+_http="https://${_git_http}.com"
 _ns="themartiancompany"
 url="${_http}/${_ns}/${_pkg}"
 license=(
@@ -91,15 +91,17 @@ license=(
 depends=(
   "${_node}"
 )
-[[ "${_os}" != "GNU/Linux" ]] && \
-[[ "${_os}" == "Android" ]] && \
+if [[ "${_os}" != "GNU/Linux" ]] && \
+   [[ "${_os}" == "Android" ]]; then
   depends+=(
   )
+fi
 optdepends=(
 )
-[[ "${_os}" == 'Android' ]] && \
+if [[ "${_os}" == 'Android' ]]; then
   optdepends+=(
   )
+fi
 makedepends=(
   'make'
 )
@@ -147,12 +149,16 @@ elif [[ "${_git}" == true ]]; then
   _sum="SKIP"
 elif [[ "${_git}" == false ]]; then
   if [[ "${_tag_name}" == 'pkgver' ]]; then
-    _src="${_tarname}.tar.gz::${_url}/archive/refs/tags/${_tag}.tar.gz"
-    _sum="d4f4179c6e4ce1702c5fe6af132669e8ec4d0378428f69518f2926b969663a91"
+    if [[ "${_git_http}" == "gitlab" ]]; then
+      _uri="${_url}/archive/refs/tags/${_tag}.${_archive_format}"
+    fi
   elif [[ "${_tag_name}" == "commit" ]]; then
-    _src="${_tarname}.zip::${_url}/archive/${_commit}.zip"
-    _sum="${_archive_sum}"
+    if [[ "${_git_http}" == "github" ]]; then
+      _uri="${_url}/archive/${_commit}.${_archive_format}"
+    fi
   fi
+  _src="${_tarname}.${_archive_format}::${_uri}"
+  _sum="${_archive_sum}"
 fi
 source=(
   "${_src}"

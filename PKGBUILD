@@ -155,6 +155,8 @@ elif [[ "${_git}" == false ]]; then
   elif [[ "${_tag_name}" == "commit" ]]; then
     if [[ "${_git_http}" == "github" ]]; then
       _uri="${_url}/archive/${_commit}.${_archive_format}"
+    elif [[ "${_git_http}" == "gitlab" ]]; then
+      _uri="${_url}/-/archive/${_commit}/${_tarname}.${_archive_format}"
     fi
   fi
   _src="${_tarname}.${_archive_format}::${_uri}"

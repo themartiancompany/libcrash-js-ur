@@ -258,7 +258,7 @@ package_libcrash-js() {
       install-scripts
     install \
       -vDm644 \
-      "${srcdir}/COPYING" \
+      "COPYING" \
       -t \
       "${pkgdir}/usr/share/licenses/${pkgname}/"
   fi
@@ -283,7 +283,7 @@ package_libcrash-js-docs() {
     install-man
   install \
     -vDm644 \
-    "${srcdir}/COPYING" \
+    "COPYING" \
     -t \
     "${pkgdir}/usr/share/licenses/${pkgname}/"
 }

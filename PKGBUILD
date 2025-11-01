@@ -43,6 +43,7 @@ if [[ ! -v "_evmfs" ]]; then
     _evmfs="false"
   fi
 fi
+_py="python"
 _node='nodejs'
 if [[ "${_os}" == "Android" ]]; then
   # This will have to be removed when we
@@ -72,14 +73,27 @@ fi
 if [[ ! -v "_npm" ]]; then
   _npm="true"
 fi
+if [[ ! -v "_docs" ]]; then
+  _docs="true"
+fi
 _archive_format="tar.gz"
 if [[ "${_git_http}" == "github" ]]; then
   _archive_format="zip"
 fi
 _pkg=crash-js
-pkgname="lib${_pkg}"
-pkgver="0.0.0.0.0.0.0.0.0.0.1.1.1"
-_commit="eebf1926abc0f64e0c9255f6acec1d54a75000ec"
+pkgbase="lib${_pkg}"
+pkgname=(
+  "${pkgbase}"
+)
+if [[ "${_docs}" == "true" ]]; then
+  if [[ "${_npm}" == "false" ]]; then
+    pkgname+=(
+      "${pkgbase}-docs"
+    )
+  fi
+fi
+pkgver="0.1.3"
+_commit="cd9b48f7fd2cce4a801db9e6f5debec6e49dca5a"
 pkgrel=1
 _pkgdesc=(
   "A collection of Javascript utility functions."
@@ -102,8 +116,22 @@ if [[ "${_os}" != "GNU/Linux" ]] && \
   depends+=(
   )
 fi
-optdepends=(
+_libcrash_js_docs_optdepends=(
+  "${pkgbase}-docs:"
+    "Crash JavaScript documentation"
+    "and manuals."
 )
+_libcrash_js_docs_ref_optdepends+=(
+ "${_pkg}:"
+   "the package this documentation"
+   "package pertains to."
+)
+optdepends=()
+if [[ "${_npm}" == "false" ]]; then
+  optdepends+=(
+    "${_libcrash_js_docs_ref_optdepends[*]}"
+  )
+fi
 if [[ "${_os}" == 'Android' ]]; then
   optdepends+=(
   )
@@ -111,6 +139,18 @@ fi
 makedepends=(
   'make'
 )
+if [[ "${_docs}" == "true" ]]; then
+  makedepends+=(
+    "${_py}-docutils"
+  )
+fi
+if [[ "${_npm}" == "true" ]]; then
+  if [[ "${_os}" == "GNU/Linux" ]]; then
+    makedepends+=(
+      "npm"
+    )
+  fi
+fi
 checkdepends=(
   "shellcheck"
 )
@@ -125,27 +165,27 @@ _tarname="${_pkg}-${_tag}"
 if [[ "${_offline}" == "true" ]]; then
   _url="file://${HOME}/${pkgname}"
 fi
-_archive_sum="d085a0f782cb07dfd3bae746d24c724db3f17fc20bcc81401e4fb074d0e30914"
-_archive_sig_sum="6a72b8b92375b7fdd59b631a74c55f38da9e03de3f44ccc216a61c681052c72d"
+_sum="d085a0f782cb07dfd3bae746d24c724db3f17fc20bcc81401e4fb074d0e30914"
+_sig_sum="6a72b8b92375b7fdd59b631a74c55f38da9e03de3f44ccc216a61c681052c72d"
 _evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
 _evmfs_network="100"
 _evmfs_address="0x69470b18f8b8b5f92b48f6199dcb147b4be96571"
 _evmfs_dir="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}"
-_evmfs_archive_uri="${_evmfs_dir}/${_archive_sum}"
-_evmfs_archive_src="${_tarname}.${_archive_format}::${_evmfs_archive_uri}"
-_archive_sig_uri="${_evmfs_dir}/${_archive_sig_sum}"
-_archive_sig_src="${_tarname}.${_archive_format}.sig::${_archive_sig_uri}"
+_evmfs_uri="${_evmfs_dir}/${_sum}"
+_evmfs_src="${_tarname}.${_archive_format}::${_evmfs_uri}"
+_sig_uri="${_evmfs_dir}/${_sig_sum}"
+_sig_src="${_tarname}.${_archive_format}.sig::${_sig_uri}"
 if [[ "${_evmfs}" == "true" ]]; then
   makedepends+=(
     "evmfs"
   )
-  _src="${_evmfs_archive_src}"
-  _sum="${_archive_sum}"
+  _src="${_evmfs_src}"
+  _sum="${_sum}"
   source+=(
-    "${_archive_sig_src}"
+    "${_sig_src}"
   )
   sha256sums+=(
-    "${_archive_sig_sum}"
+    "${_sig_sum}"
   )
 elif [[ "${_git}" == true ]]; then
   makedepends+=(
@@ -166,7 +206,6 @@ elif [[ "${_git}" == false ]]; then
     fi
   fi
   _src="${_tarname}.${_archive_format}::${_uri}"
-  _sum="${_archive_sum}"
 fi
 source=(
   "${_src}"
@@ -192,13 +231,63 @@ check() {
     check
 }
 
-package() {
+build() {
+  if [[ "${_npm}" == "true" ]]; then
+    cd \
+      "${_tarname}"
+    make \
+      "${_make_opts[@]}" \
+      build-npm
+  fi
+}
+
+package_libcrash-js() {
+  local \
+    _make_opts=()
+  _make_opts=(
+    DESTDIR="${pkgdir}"
+    PREFIX='/usr'
+  )
+  cd \
+    "${_tarname}"
+  if [[ "${_npm}" == "true" ]]; then
+   make \
+     "${_make_opts[@]}" \
+     install-npm
+  elif [[ "${_npm}" == "false" ]]; then
+    make \
+      "${_make_opts[@]}" \
+      install-scripts
+    install \
+      -vDm644 \
+      "${srcdir}/COPYING" \
+      -t \
+      "${pkgdir}/usr/share/licenses/${pkgname}/"
+  fi
+}
+
+package_libcrash-js-docs() {
+  local \
+    _make_opts=()
+  depends=()
+  optdepends=(
+    "${_libcrash_js_docs_ref_optdepends[*]}"
+  )
+  _make_opts=(
+    DESTDIR="${pkgdir}"
+    PREFIX='/usr'
+  )
   cd \
     "${_tarname}"
   make \
-    PREFIX="/usr" \
-    DESTDIR="${pkgdir}" \
-    install
+    "${_make_opts[@]}" \
+    install-doc \
+    install-man
+  install \
+    -vDm644 \
+    "${srcdir}/COPYING" \
+    -t \
+    "${pkgdir}/usr/share/licenses/${pkgname}/"
 }
 
 # vim: ft=sh syn=sh et

@@ -92,8 +92,8 @@ if [[ "${_docs}" == "true" ]]; then
     )
   fi
 fi
-pkgver="0.1.3"
-_commit="cd9b48f7fd2cce4a801db9e6f5debec6e49dca5a"
+pkgver="0.1.4"
+_commit="e245a341413f9f32f4b3aac59f58b0ce502b0e36"
 pkgrel=1
 _pkgdesc=(
   "A collection of Javascript utility functions."
@@ -165,8 +165,8 @@ _tarname="${_pkg}-${_tag}"
 if [[ "${_offline}" == "true" ]]; then
   _url="file://${HOME}/${pkgname}"
 fi
-_sum="d085a0f782cb07dfd3bae746d24c724db3f17fc20bcc81401e4fb074d0e30914"
-_sig_sum="6a72b8b92375b7fdd59b631a74c55f38da9e03de3f44ccc216a61c681052c72d"
+_sum="269d84491fe9d152431e40bf97b7fa1a7d2c80604425ef38b085baac578fe825"
+_sig_sum="891ecf78cd13dfab5fd802c074f119a7fb7887d0781279f0cf49569aa30abe3f"
 _evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
 _evmfs_network="100"
 _evmfs_address="0x69470b18f8b8b5f92b48f6199dcb147b4be96571"

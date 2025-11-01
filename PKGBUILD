@@ -20,10 +20,13 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-# Maintainer: Truocolo <truocolo@aol.com>
-# Maintainer: Truocolo <truocolo@0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b>
-# Maintainer: Pellegrino Prevete (dvorak) <pellegrinoprevete@gmail.com>
-# Maintainer: Pellegrino Prevete (dvorak) <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
+# Maintainers:
+#   Truocolo
+#     <truocolo@aol.com>
+#     <truocolo@0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b>
+#   Pellegrino Prevete (dvorak)
+#     <pellegrinoprevete@gmail.com>
+#     <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
 
 _os="$( \
   uname \
@@ -65,6 +68,9 @@ if [[ ! -v "_offline" ]]; then
 fi
 if [[ ! -v "_git_http" ]]; then
   _git_http="gitlab"
+fi
+if [[ ! -v "_npm" ]]; then
+  _npm="true"
 fi
 _archive_format="tar.gz"
 if [[ "${_git_http}" == "github" ]]; then

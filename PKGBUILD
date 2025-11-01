@@ -90,7 +90,7 @@ if [[ "${_docs}" == "true" ]]; then
     "${pkgbase}-docs"
   )
 fi
-pkgver="0.1.5"
+pkgver="0.1.4"
 _commit="8239986a8bae1c45e830219e51d96f20038f3f0a"
 pkgrel=1
 _pkgdesc=(

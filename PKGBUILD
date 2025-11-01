@@ -86,13 +86,11 @@ pkgname=(
   "${pkgbase}"
 )
 if [[ "${_docs}" == "true" ]]; then
-  if [[ "${_npm}" == "false" ]]; then
-    pkgname+=(
-      "${pkgbase}-docs"
-    )
-  fi
+  pkgname+=(
+    "${pkgbase}-docs"
+  )
 fi
-pkgver="0.1.4"
+pkgver="0.1.5"
 _commit="8239986a8bae1c45e830219e51d96f20038f3f0a"
 pkgrel=1
 _pkgdesc=(

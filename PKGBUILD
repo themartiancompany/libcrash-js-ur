@@ -90,8 +90,8 @@ if [[ "${_docs}" == "true" ]]; then
     "${pkgbase}-docs"
   )
 fi
-pkgver="0.1.4"
-_commit="8239986a8bae1c45e830219e51d96f20038f3f0a"
+pkgver="0.1.17"
+_commit="3127d94bb101d75f107811f5422bc50230ac2fed"
 pkgrel=1
 _pkgdesc=(
   "A collection of Javascript utility functions."
@@ -114,6 +114,13 @@ if [[ "${_os}" != "GNU/Linux" ]] && \
   depends+=(
   )
 fi
+_ahsi_optdepends=(
+  "ahsi:"
+    "Hello World program for a"
+    "program writen using both"
+    "Crash JavaScript and Crash"
+    "Bash."
+)
 _libcrash_js_docs_optdepends=(
   "${pkgbase}-docs:"
     "Crash JavaScript documentation"
@@ -124,7 +131,9 @@ _libcrash_js_docs_ref_optdepends+=(
    "the package this documentation"
    "package pertains to."
 )
-optdepends=()
+optdepends=(
+  "${_ahsi_optdepends[*]}"
+)
 if [[ "${_npm}" == "false" ]]; then
   optdepends+=(
     "${_libcrash_js_docs_ref_optdepends[*]}"
@@ -164,9 +173,12 @@ _tarfile="${_tarname}.${_archive_format}"
 if [[ "${_offline}" == "true" ]]; then
   _url="file://${HOME}/${pkgname}"
 fi
-_sum="de5e9de71b6e7fda6d68791882a228d0f746a0452e59d8abda14e9fdc3b4be5d"
-_sig_sum="ded760ad567ca640a81f7bdcc986a499ad3e797cc312938c725ddfb452d44610"
+_sum="97e7828ec805b6b5654bcd02f2094e932795a3e89ca3fdf2747399ae78697789"
+_sig_sum="db64099a47b4606d7359753a7b23f57853ec07e52d35f58dfea0d2bfc92b83c7"
+# Dvorak
 _evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
+# Truocolo
+_evmfs_ns="0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b"
 _evmfs_network="100"
 _evmfs_address="0x69470b18f8b8b5f92b48f6199dcb147b4be96571"
 _evmfs_dir="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}"

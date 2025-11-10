@@ -91,7 +91,7 @@ if [[ "${_docs}" == "true" ]]; then
   )
 fi
 pkgver="0.1.17"
-_commit="3127d94bb101d75f107811f5422bc50230ac2fed"
+_commit="86e43681ff21c40490a0ec5ae3e69c6ac67ff5ce"
 pkgrel=1
 _pkgdesc=(
   "A collection of Javascript utility functions."
@@ -173,8 +173,8 @@ _tarfile="${_tarname}.${_archive_format}"
 if [[ "${_offline}" == "true" ]]; then
   _url="file://${HOME}/${pkgname}"
 fi
-_sum="97e7828ec805b6b5654bcd02f2094e932795a3e89ca3fdf2747399ae78697789"
-_sig_sum="db64099a47b4606d7359753a7b23f57853ec07e52d35f58dfea0d2bfc92b83c7"
+_sum="4f3e8670837cb11f7d1ed992e611d4ffbb3f85b6be47dbee7ab336462c015b0d"
+_sig_sum="63b0f45a3d741b90b094e925710fbbf01e22806f35fde7c9f5397b8324c025c1"
 # Dvorak
 _evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
 # Truocolo

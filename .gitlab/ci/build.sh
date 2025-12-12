@@ -223,7 +223,7 @@ _requirements() {
         "_commit")"
     _gl_dl_mini \
       "${ns}" \
-      "${_pkgname%lib}" \
+      "${_pkgname#lib}" \
       "${_commit}"
     cp \
       "${HOME}/${_pkgname}-${_commit}.tar.gz" \

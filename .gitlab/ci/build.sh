@@ -192,9 +192,15 @@ _build() {
     _reallymakepkg_opts=() \
     _makepkg_opts=() \
     _cmd=() \
+    _home \
+    _makedepends=() \
+    _pkgbuild \
     _pkgname \
-    _makedepends=()
+    _work_dir
   _pkgname="${pkg%-ur}"
+  _home="/home/user"
+  _work_dir="${_home}/ramdisk/${_pkgname}-build"
+  _pkgbuild="${_home}/${_pkgname}/PKGBUILD"
   _makedepends_get
   _reallymakepkg_opts+=(
     -v

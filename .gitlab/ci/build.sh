@@ -226,7 +226,7 @@ _requirements() {
       "${_pkgname#lib}" \
       "${_commit}"
     cp \
-      "${HOME}/${_pkgname}-${_commit}.tar.gz" \
+      "${HOME}/${_pkgname#lib}-${_commit}.tar.gz" \
       "/home/user/${_pkgname}"
   fi
 }

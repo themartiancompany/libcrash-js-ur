@@ -71,7 +71,7 @@ if [[ ! -v "_git_http" ]]; then
   _git_http="gitlab"
 fi
 if [[ ! -v "_npm" ]]; then
-  _npm="true"
+  _npm="false"
 fi
 if [[ ! -v "_docs" ]]; then
   _docs="true"

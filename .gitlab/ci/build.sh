@@ -205,15 +205,6 @@ _requirements() {
     "${_fur_release_latest}" \
     "n" || \
   true
-  _fur_opts+=(
-    -l
-      "bur"
-    -m
-      "gitlab"
-  )
-  fur \
-    "${_fur_opts[@]}" \
-    "reallymakepkg"
   recipe-get \
     -v \
     "/home/user/${_pkgname}/PKGBUILD" \

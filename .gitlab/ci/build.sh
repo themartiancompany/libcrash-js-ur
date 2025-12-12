@@ -202,6 +202,7 @@ _build() {
   _work_dir="${_home}/ramdisk/${_pkgname}-build"
   _pkgbuild="${_home}/${_pkgname}/PKGBUILD"
   _makedepends_get
+  _makedepends_install
   _reallymakepkg_opts+=(
     -v
     -w

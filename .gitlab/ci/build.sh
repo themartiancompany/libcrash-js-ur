@@ -121,13 +121,81 @@ _requirements() {
     "/home/user/${_pkgname}"
 }
 
+_makedepends_get() {
+  local \
+    _depend \
+    _depend_name \
+    _depend_pkgver \
+    _depend_target \
+    _msg=() \
+    _resolve_flag
+  for _depend \
+    in $(recipe-get \
+           "${_pkgbuild}" \
+           "makedepends"); do
+    _resolve_flag="false"
+    _depend_target="${_depend}"
+    if [[ "${_depend}" == *"<"* ]]; then
+      _depend_name="${_depend%<*}"
+      _depend_pkgver="${_depend#${_depend_name}}"
+      _resolve_flag="true"
+      _depend_target="${_depend_name}"
+    elif [[ "${_depend}" == *"="* ]]; then
+      _depend_name="${_depend%=*}"
+      _depend_pkgver="${_depend#=${_depend_name}}"
+      _resolve_flag="true"
+      _depend_target="${_depend_name}"
+    fi
+    if [[ "${_resolve_flag}" == "true" ]]; then
+      _msg=(
+        "It is requested version"
+        "'${_depend_pkgver}' of"
+        "package '${_depend_name}'."
+        "Be aware the Fur doesn't"
+        "look for provides currently."
+      )
+      echo \
+        "${_msg[*]}"
+    fi
+    _makedepends+=(
+      "${_depend_target}"
+    )
+  done
+}
+
+_makedepends_install() {
+  local \
+    _depend \
+    _msg=() \
+    _pacman_opts=()
+  _pacman_opts+=(
+    -S
+    --noconfirm
+  )
+  for _depend in "${_makedepends[@]}"; do
+    _msg=(
+      "Installing makedepend"
+      "'${_depend}'"
+      "with pacman."
+    )
+    echo \
+      "${_msg[*]}"
+    pacman \
+      "${_pacman_opts[@]}" \
+      "${_depend}" || \
+      true
+  done
+}
+
 _build() {
   local \
     _reallymakepkg_opts=() \
     _makepkg_opts=() \
     _cmd=() \
-    _pkgname
+    _pkgname \
+    _makedepends=()
   _pkgname="${pkg%-ur}"
+  _makedepends_get
   _reallymakepkg_opts+=(
     -v
     -w

@@ -225,17 +225,6 @@ _requirements() {
       "${ns}" \
       "${_pkgname}" \
       "${_commit}"
-    _docs_commit="$(
-      recipe-get \
-        "/home/user/${_pkgname}/PKGBUILD" \
-        "_docs_commit")"
-    _gl_dl_mini \
-      "${ns}" \
-      "${_pkgname}-docs-ur" \
-      "${_docs_commit}"
-    recipe-get \
-      "/home/user/${_pkgname}/PKGBUILD" \
-      "_git_http"
     cp \
       "${HOME}/${_pkgname}-${_commit}.tar.gz" \
       "/home/user/${_pkgname}"

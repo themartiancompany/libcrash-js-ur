@@ -228,9 +228,6 @@ _requirements() {
     cp \
       "${HOME}/${_pkgname}-${_commit}.tar.gz" \
       "/home/user/${_pkgname}"
-    cp \
-      "${HOME}/${_pkgname}-docs-${_commit}.tar.gz" \
-      "/home/user/${_pkgname}"
   fi
 }
 

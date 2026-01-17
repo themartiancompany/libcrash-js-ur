@@ -70,6 +70,9 @@ fi
 if [[ ! -v "_git_http" ]]; then
   _git_http="gitlab"
 fi
+if [[ ! -v "_ns" ]]; then
+  _ns="themartiancompany"
+fi
 if [[ ! -v "_npm" ]]; then
   _npm="true"
 fi
@@ -101,7 +104,6 @@ arch=(
   'any'
 )
 _http="https://${_git_http}.com"
-_ns="themartiancompany"
 url="${_http}/${_ns}/${_pkg}"
 license=(
   'AGPL3'

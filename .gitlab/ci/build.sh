@@ -262,6 +262,17 @@ _build() {
     -df
     --nocheck
   )
+  if [[ "${ns}" != "themartiancompany" ]]; then
+    _evmfs="$( \
+      recipe-get \
+        "/home/user/${_pkgname}/PKGBUILD" \
+        "_evmfs")"
+    if [[ "${_evmfs}" == "false" ]]; then
+      _makepkg_opts+=(
+        --skipinteg
+      )
+    fi
+  fi
   for _depend in $(recipe-get \
                      "${_pkgbuild}" \
         "makedepends"); do

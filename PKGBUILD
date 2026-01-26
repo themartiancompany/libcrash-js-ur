@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0
 
 #    ----------------------------------------------------------------------
-#    Copyright © 2024, 2025  Pellegrino Prevete
+#    Copyright © 2024, 2025, 2026  Pellegrino Prevete
 #
 #    All rights reserved
 #    ----------------------------------------------------------------------
@@ -95,7 +95,7 @@ if [[ "${_docs}" == "true" ]]; then
 fi
 pkgver="0.1.69"
 _commit="24e49d2b4ec2ba2ff74bfbaa0a52a005a98d6d47"
-pkgrel=28
+pkgrel=30
 _pkgdesc=(
   "A collection of Javascript utility functions."
 )

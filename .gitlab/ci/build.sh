@@ -241,6 +241,7 @@ _requirements() {
 
 _build() {
   local \
+    _reallymakepkg_env=() \
     _reallymakepkg_opts=() \
     _makepkg_opts=() \
     _makedepends=() \
@@ -271,13 +272,16 @@ _build() {
     --nocheck
   )
   if [[ "${ns}" != "themartiancompany" ]]; then
-    _evmfs="$( \
+    _evmfs="$(
       recipe-get \
         "/home/user/${_pkgname}/PKGBUILD" \
         "_evmfs")"
     if [[ "${_evmfs}" == "false" ]]; then
       _makepkg_opts+=(
         --skipinteg
+      )
+      _reallymakepkg_env+=(
+        "_ns='${ns}'"
       )
     fi
   fi
@@ -347,6 +351,7 @@ _build() {
   _cmd+=(
     "cd"
       "${_home}/${_pkgname}" "&&"
+    "${_reallymakepkg_env[@]}"
     "reallymakepkg"
       "${_reallymakepkg_opts[@]}"
       "--"

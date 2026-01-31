@@ -95,7 +95,7 @@ if [[ "${_docs}" == "true" ]]; then
 fi
 pkgver="0.1.69"
 _commit="24e49d2b4ec2ba2ff74bfbaa0a52a005a98d6d47"
-pkgrel=31
+pkgrel=33
 _pkgdesc=(
   "A collection of Javascript utility functions."
 )

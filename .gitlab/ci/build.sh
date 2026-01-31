@@ -171,8 +171,10 @@ _requirements() {
     _fur_release_latest \
     _fur_release_public \
     _gur_release_latest \
-    _libcrash_bash_release_latest
+    _libcrash_bash_release_latest \
+    _repo_dir
   _pkgname="${pkg%-ur}"
+  _repo_dir="/home/user/${_pkgname}"
   _fur_mini_opts+=(
     "${platform}"
   )
@@ -216,18 +218,18 @@ _requirements() {
   true
   recipe-get \
     -v \
-    "/home/user/${_pkgname}/PKGBUILD" \
+    "${_repo_dir}/PKGBUILD" \
     "_git_http" || \
     true
   _git_http="$(
     recipe-get \
-      "/home/user/${_pkgname}/PKGBUILD" \
+      "${_repo_dir}/PKGBUILD" \
       "_git_http" || \
       true)"
   if [[ "${_git_http}" == "gitlab" ]]; then
     _commit="$(
       recipe-get \
-        "/home/user/${_pkgname}/PKGBUILD" \
+        "${_repo_dir}/PKGBUILD" \
         "_commit")"
     _gl_dl_mini \
       "${ns}" \
@@ -235,7 +237,9 @@ _requirements() {
       "${_commit}"
     cp \
       "${HOME}/${_pkgname#lib}-${_commit}.tar.gz" \
-      "/home/user/${_pkgname}"
+      "${_repo_dir}"
+    ls \
+      "${_repo_dir}"
   fi
 }
 
